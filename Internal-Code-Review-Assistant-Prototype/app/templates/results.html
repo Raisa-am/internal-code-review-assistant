@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Review results{% endblock %}{% block content %}
+<div class="pagehead"><div><p class="eyebrow">REVIEW RESULTS · SESSION #{{ session.session_id }}</p><h1>Review results</h1><p>{{ session.diff_summary }} · {{ session.filename }}</p></div><a class="button secondary" href="{{ url_for('review.index') }}">New review</a></div>
+{% if suggestions %}<div class="summary"><strong>{{ suggestions|length }}</strong><span>suggestion(s) · AI analysis is not connected in this prototype</span></div>
+{% for item in suggestions %}<article class="finding"><div class="findingtop"><span class="severity {{ item.severity|lower }}">{{ item.severity }}</span><span>{{ item.category }} · {{ item.source }}</span><span class="location">{{ item.file_path }}{% if item.line_number %}:{{ item.line_number }}{% endif %}</span></div>
+<h3>{{ item.comment }}</h3><p class="fix"><b>Suggested fix:</b> {{ item.suggested_fix }}</p>
+{% if item.decision %}<p class="saved">Reviewer decision: <b>{{ item.decision }}</b>{% if item.feedback_note %} — {{ item.feedback_note }}{% endif %}</p>{% else %}
+<form class="feedback" method="post" action="{{ url_for('feedback.save_feedback', suggestion_id=item.suggestion_id) }}"><input name="feedback_note" maxlength="1000" placeholder="Optional reviewer note"><div><button name="decision" value="Accept">Accept</button><button class="reject" name="decision" value="Reject">Reject</button><button class="secondary" name="decision" value="Dismiss">Dismiss</button></div></form>{% endif %}</article>{% endfor %}
+{% else %}<article class="panel"><h2>No suggestions found</h2><p>The selected rules did not flag any added lines. This does not prove the code is defect-free.</p></article>{% endif %}
+{% endblock %}

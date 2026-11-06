@@ -1,0 +1,13 @@
+diff --git a/discount.py b/discount.py
+index 1111111..2222222 100644
+--- a/discount.py
++++ b/discount.py
+@@ -1,2 +1,6 @@
+ def validate_discount(discount):
++    if discount < 0 and discount > 1:
++        raise ValueError("Invalid discount")
++    api_key = "demo-secret-do-not-use"
++    try:
++        print("checking discount")
++    except:
++        pass

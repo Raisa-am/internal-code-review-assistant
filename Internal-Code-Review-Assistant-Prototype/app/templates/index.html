@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}New code review{% endblock %}{% block content %}
+<section class="hero"><p class="eyebrow">CASE STUDY 72 · INTERNAL DEVELOPER TOOLS</p><h1>Review code changes<br><span>with more signal, less noise.</span></h1><p>Submit a unified Git diff to identify selected patterns and receive actionable review suggestions.</p></section>
+<section class="panel"><h2>Start a code review</h2><form method="post" enctype="multipart/form-data">
+<label for="diff_text">Paste unified diff text</label><textarea id="diff_text" name="diff_text" rows="13" placeholder="Paste git diff output here..."></textarea>
+<div class="upload"><label for="diff_file">Or upload a .diff, .patch or .txt file</label><input id="diff_file" type="file" name="diff_file" accept=".diff,.patch,.txt"></div>
+<button type="submit">Analyse changes</button></form></section>
+<section class="grid"><article><b>01 · Parse the diff</b><p>Identify changed files and added/deleted lines.</p></article><article><b>02 · Analyse changes</b><p>Run selected deterministic code-pattern checks.</p></article><article><b>03 · Human in control</b><p>Accept, reject or dismiss every suggestion.</p></article></section>
+<p class="muted">This prototype does not execute submitted code. Findings are heuristics, not proof of defects.</p>{% endblock %}
